@@ -85,3 +85,7 @@ This repository teaches reproducible, reviewable workflow development on the Bik
 ## 9. Risk & Task Selection
 - **Assess "Blast Radius"**: Prefer delegating "Downstream" tasks (reporting, visualization, secondary analysis) over "Upstream" tasks (data fetching, core cleaning) as they have a smaller impact on total project integrity.
 - **Review Burden Principle**: A task is well-delegated if the effort to review the results (diffs + artifacts) is significantly lower than the effort to implement it manually.
+
+## 10. Resource Management & Performance
+- **Monitor Context Usage**: Always track the estimated percentage of the context window being used.
+- **Escalation Threshold**: If the context usage exceeds **60%**, stop and escalate to the user to discuss context trimming, file consolidation, or task splitting to maintain performance and avoid "forgetting" instructions.
