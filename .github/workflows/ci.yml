@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main, feat/mlflow-tracking]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install dependencies
+        run: uv sync
+      - name: Run validation gate
+        run: |
+          uv run pytest -q \
+            tests/test_prepare.py \
+            tests/test_integration_stage_handoff.py \
+            tests/test_workflow_smoke.py \
+            tests/test_known_answer.py \
+            tests/test_invariants.py
