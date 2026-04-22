@@ -45,7 +45,9 @@ def run_analyze(cfg, ctx=None, input_csv: Path | None = None) -> dict:
     prepared = pd.read_csv(prepared_csv)
 
     high_demand_quantile = float(cfg.analysis.high_demand_quantile)
-    high_demand_threshold = float(prepared["total_rentals"].quantile(high_demand_quantile))
+    high_demand_threshold = float(
+        prepared["total_rentals"].quantile(high_demand_quantile)
+    )
     prepared_with_threshold = prepared.assign(
         is_high_demand=lambda x: x["total_rentals"] >= high_demand_threshold,
     )
@@ -58,6 +60,25 @@ def run_analyze(cfg, ctx=None, input_csv: Path | None = None) -> dict:
         .rename(columns={"is_high_demand": "high_demand_share"})
     )
 
+    # Temperature band analysis
+    # temp is normalized 0 to 1. We use 0.2 increments.
+    temp_bins = [0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    temp_labels = ["Cold", "Cool", "Mild", "Warm", "Hot"]
+
+    prepared_with_bands = prepared.assign(
+        temp_band=pd.cut(
+            prepared["temp"], bins=temp_bins, labels=temp_labels, include_lowest=True
+        )
+    )
+
+    temp_band_summary = (
+        prepared_with_bands.groupby("temp_band", as_index=False, observed=True)[
+            "total_rentals"
+        ]
+        .mean()
+        .rename(columns={"total_rentals": "mean_rentals"})
+    )
+
     if "weather" in prepared.columns:
         weather_summary = (
             prepared.groupby("weather", as_index=False)
@@ -68,7 +89,9 @@ def run_analyze(cfg, ctx=None, input_csv: Path | None = None) -> dict:
             .sort_values("mean_rentals", ascending=False)
         )
     else:
-        logger.warning("analyze:weather_column_missing skipping weather summary aggregation")
+        logger.warning(
+            "analyze:weather_column_missing skipping weather summary aggregation"
+        )
         weather_summary = pd.DataFrame(
             columns=["weather", "mean_rentals", "observations"],
         )
@@ -82,11 +105,13 @@ def run_analyze(cfg, ctx=None, input_csv: Path | None = None) -> dict:
 
     hourly_profile_path = output_dir / "hourly_profile.csv"
     high_demand_share_path = output_dir / "high_demand_share_by_hour.csv"
+    temp_band_summary_path = output_dir / "temp_band_summary.csv"
     weather_summary_path = output_dir / "weather_summary.csv"
     summary_path = output_dir / "high_demand_summary.json"
 
     hourly_profile.to_csv(hourly_profile_path, index=False)
     high_demand_share_by_hour.to_csv(high_demand_share_path, index=False)
+    temp_band_summary.to_csv(temp_band_summary_path, index=False)
     weather_summary.to_csv(weather_summary_path, index=False)
     summary_path.write_text(json.dumps(summary, indent=2) + "\n")
 
@@ -99,6 +124,7 @@ def run_analyze(cfg, ctx=None, input_csv: Path | None = None) -> dict:
 
     return {
         "prepared_csv": str(prepared_csv),
+        "temp_band_summary_csv": str(temp_band_summary_path),
         "hourly_profile_csv": str(hourly_profile_path),
         "high_demand_share_csv": str(high_demand_share_path),
         "weather_summary_csv": str(weather_summary_path),
