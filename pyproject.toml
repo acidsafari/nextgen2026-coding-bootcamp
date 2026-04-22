@@ -9,8 +9,10 @@ authors = [
 requires-python = ">=3.10"
 dependencies = [
     "matplotlib>=3.8.0",
+    "mlflow>=3.11.1",
     "omegaconf>=2.3.0",
     "pandas>=2.2.0",
+    "tabulate>=0.10.0",
 ]
 
 [dependency-groups]

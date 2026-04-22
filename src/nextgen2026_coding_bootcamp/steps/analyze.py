@@ -104,4 +104,6 @@ def run_analyze(cfg, ctx=None) -> dict:
         "high_demand_share_csv": str(demand_share_path),
         "weather_summary_csv": str(weather_summary_path),
         "summary_json": str(summary_json_path),
+        "threshold": high_demand_threshold,
+        "rows_in": len(prepared),
     }
