@@ -12,6 +12,7 @@ dependencies = [
     "mlflow>=3.11.1",
     "omegaconf>=2.3.0",
     "pandas>=2.2.0",
+    "prefect>=3.6.27",
     "tabulate>=0.10.0",
 ]
 
