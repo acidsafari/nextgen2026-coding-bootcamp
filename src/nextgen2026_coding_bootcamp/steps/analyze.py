@@ -61,13 +61,13 @@ def run_analyze(cfg, ctx=None, input_csv: Path | None = None) -> dict:
     )
 
     # Temperature band analysis
-    # temp is normalized 0 to 1. We use 0.2 increments.
-    temp_bins = [0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    # Using temp_c (Celsius) from prepare stage.
+    temp_bins = [-10, 5, 15, 25, 35, 45]
     temp_labels = ["Cold", "Cool", "Mild", "Warm", "Hot"]
 
     prepared_with_bands = prepared.assign(
         temp_band=pd.cut(
-            prepared["temp"], bins=temp_bins, labels=temp_labels, include_lowest=True
+            prepared["temp_c"], bins=temp_bins, labels=temp_labels, include_lowest=True
         )
     )
 

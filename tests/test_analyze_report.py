@@ -12,11 +12,11 @@ def test_analyze_and_report_generate_expected_baseline_artifacts(tmp_path: Path)
     prepared_csv = tmp_path / "intermediate" / "hourly_bike_data.csv"
     prepared_csv.parent.mkdir(parents=True, exist_ok=True)
     prepared_csv.write_text(
-        "date,hour,season,month,weekday,holiday,workingday,day_type,weather,temp,temp_c,feels_like_c,humidity_pct,windspeed_kph,casual,registered,total_rentals\n"
-        "2011-01-01,8,winter,1,6,0,0,non_working_day,clear,0.1,4.99,3.01,81.0,0.0,3,7,10\n"
-        "2011-01-03,8,spring,1,1,0,1,working_day,mist_cloud,0.3,5.00,2.00,80.0,6.7,8,12,20\n"
-        "2011-01-03,9,spring,1,1,0,1,working_day,mist_cloud,0.5,15.00,2.00,80.0,6.7,12,18,30\n"
-        "2011-01-03,10,summer,1,1,0,1,working_day,clear,0.9,25.00,2.00,80.0,6.7,15,25,40\n"
+        "date,hour,season,month,weekday,holiday,workingday,day_type,weather,temp_c,feels_like_c,humidity_pct,windspeed_kph,casual,registered,total_rentals\n"
+        "2011-01-01,8,winter,1,6,0,0,non_working_day,clear,0.0,3.01,81.0,0.0,3,7,10\n"
+        "2011-01-03,8,spring,1,1,0,1,working_day,mist_cloud,10.0,2.00,80.0,6.7,8,12,20\n"
+        "2011-01-03,9,spring,1,1,0,1,working_day,mist_cloud,20.0,2.00,80.0,6.7,12,18,30\n"
+        "2011-01-03,10,summer,1,1,0,1,working_day,clear,40.0,2.00,80.0,6.7,15,25,40\n"
     )
 
     cfg = OmegaConf.create(
