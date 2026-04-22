@@ -38,6 +38,8 @@ graph TD
 - [x] Agent Brief Approved
 - [x] Implementation Plan Reviewed
 - [x] Final Verification Passed
+- [x] Review & Decision Recorded
+- [x] Hardening Note Approved
 
 ## 📊 Resource Management
 
