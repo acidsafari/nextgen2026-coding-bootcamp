@@ -13,7 +13,7 @@ This repository teaches reproducible, reviewable workflow development on the Bik
   - `uv run python scripts/03_report.py --config configs/stages/report.yaml --run-name report-only`
 
 ## Repository Map
-- `src/nextgen2026_coding_bootcamp/steps/`: stage logic
+- `src/nextgen2026_coding_bootcamp/steps/`: stage logic (Entry points: `run_fetch`, `run_prepare`, `run_analyze`, `run_report`)
 - `scripts/`: CLI wrappers and workflow runner
 - `configs/`: run/path/stage/profile configuration
 - `tests/`: regression and workflow checks
@@ -68,26 +68,20 @@ This repository teaches reproducible, reviewable workflow development on the Bik
 
 ---
 
-## 7. Delegation & Review (Session 3 Workflow)
-- **Delegation Defaults**:
-  - Use one agent per bounded contract.
-  - Request a plan before implementation.
-  - Keep diffs small and scoped.
-  - Run verification commands listed in the task contract.
+## 7. Delegation & Review (Core Principles)
+- **Delegation Strategy**: Use one agent per bounded contract. Request a plan before implementation. Keep diffs small and scoped.
 - **Review Requirements**: Every delegated change must include:
-  - contract alignment check
-  - diff review
-  - test evidence
-  - artifact/output inspection
+  - contract alignment check (does it do what was approved?)
+  - diff review (is the code idiomatic and safe?)
+  - test evidence (including extensions to existing tests for new features)
+  - artifact/output inspection (are the results scientifically plausible?)
   - explicit Accept/Revise/Reject decision
 
-## 8. Guardrails
-- **Do Not Change Unless Explicitly Requested**:
-  - stage script CLI semantics
-  - stage ordering in full workflow (`fetch -> prepare -> analyze -> report`)
-  - artifact contracts consumed by downstream stages
-  - scientific meaning of transformations without a documented review decision
-- **Escalate to Human Feedback Immediately**:
-  - destructive git operations
-  - broad refactors outside contract
-  - semantic or interpretation changes that exceed acceptance criteria
+## 8. Workflow Guardrails
+- **Protect Core Transformations**: Do not change upstream data logic (the "source of truth") unless explicitly requested.
+- **Respect Stage Boundaries**: Logic should be placed in the stage that "owns" the data transformation to prevent leaky abstractions.
+- **Maintain CLI Semantics**: Do not change established command-line interfaces or argument signatures as they are often consumed by CI/CD or other users.
+
+## 9. Risk & Task Selection
+- **Assess "Blast Radius"**: Prefer delegating "Downstream" tasks (reporting, visualization, secondary analysis) over "Upstream" tasks (data fetching, core cleaning) as they have a smaller impact on total project integrity.
+- **Review Burden Principle**: A task is well-delegated if the effort to review the results (diffs + artifacts) is significantly lower than the effort to implement it manually.
