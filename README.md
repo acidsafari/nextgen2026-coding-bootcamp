@@ -1,3 +1,9 @@
+# NextGen Coding Bootcamp
+
+This four-session boot camp introduces the core workflow skills needed to run a computational research project from setup to reproducible handoff. We will learn how to structure a research repository, run analyses through scripts and configuration, capture logs and outputs, use coding tools such as Copilot to accelerate development, and produce work that another researcher can rerun, review, and extend.
+
+---
+
 # Session 3 - Controlled Agent Collaboration for Workflow Extensions
 
 This repository shows you how to use AI coding agents inside the Bike Sharing workflow without giving up control of the work. We keep the agent inside a bounded, reviewable workflow instead of making it the center of the session.
