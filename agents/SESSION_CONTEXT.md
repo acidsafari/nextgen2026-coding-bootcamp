@@ -1,29 +1,31 @@
 # Session Context Registry
 
-## Active Task: Temperature-Band Summary (`feat/temp-band-summary`)
+## Active Task: Session 2 Completion & Scalability Upgrade (`feat/mlflow-tracking`)
 
 ### 🗺️ Context Map
 This diagram shows the relationship between our task and the repository surfaces.
 
 ```mermaid
 graph TD
-    subgraph Upstream [Read-Only / High Risk]
-        F[fetch.py] --> P[prepare.py]
+    subgraph Core [Session 2]
+        W[workflow.py] --> RW[run_workflow.py]
+        RW --> T[tests/]
     end
 
-    subgraph Downstream [Active Context / Low Risk]
-        A[analyze.py] --> R[report.py]
-        TS[test_analyze_report.py]
+    subgraph Scalability [Appendices]
+        RW --> ML[MLflow]
+        RW --> P[Prefect]
+        RW --> H[Hydra]
+        T --> GH[GitHub Actions]
     end
 
-    subgraph Config
-        AC[analyze.yaml]
+    subgraph Templates [Session 4]
+        BT[Basic Template]
+        AT[Advanced Template]
     end
 
-    P -.->|input_csv| A
-    A -->|temp_band_summary.csv| R
-    A -->|temp_band_summary.csv| TS
-    AC --> A
+    RW -.->|derived from| BT
+    Scalability -.->|derived from| AT
 ```
 
 ### 📋 Context Bundle Log
