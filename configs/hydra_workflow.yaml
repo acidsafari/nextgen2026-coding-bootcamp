@@ -1,0 +1,17 @@
+defaults:
+  - run
+  - paths
+  - stages/fetch@_global_
+  - stages/prepare@_global_
+  - stages/analyze@_global_
+  - stages/report@_global_
+  - profiles/base@_global_
+  - _self_
+
+run_name: hydra
+log_level: INFO
+experiment: bike-sharing-hydra
+
+hydra:
+  job:
+    chdir: false

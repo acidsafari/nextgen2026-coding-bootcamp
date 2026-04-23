@@ -1,0 +1,53 @@
+{
+  "run_id": "2026-04-22_16-51-19_hydra-sweep_1c4f61",
+  "git_commit": null,
+  "artifacts": {
+    "fetch": {
+      "source_url": "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip",
+      "archive_path": "data/raw/Bike-Sharing-Dataset.zip",
+      "archive_member": "hour.csv",
+      "raw_csv": "data/raw/hour.csv",
+      "downloaded_archive": false,
+      "extracted_member": false
+    },
+    "prepare": {
+      "raw_csv": "data/raw/hour.csv",
+      "prepared_csv": "data/intermediate/hourly_bike_data.csv",
+      "rows_out": 17379,
+      "columns": [
+        "date",
+        "hour",
+        "season",
+        "month",
+        "weekday",
+        "holiday",
+        "workingday",
+        "day_type",
+        "weather",
+        "temp_c",
+        "feels_like_c",
+        "humidity_pct",
+        "windspeed_kph",
+        "casual",
+        "registered",
+        "total_rentals"
+      ],
+      "keep_holidays": true
+    },
+    "analyze": {
+      "prepared_csv": "data/intermediate/hourly_bike_data.csv",
+      "hourly_profile_csv": "runs/2026-04-22_16-51-19_hydra-sweep_1c4f61/analyze/hourly_profile.csv",
+      "high_demand_share_csv": "runs/2026-04-22_16-51-19_hydra-sweep_1c4f61/analyze/high_demand_share_by_hour.csv",
+      "weather_summary_csv": "runs/2026-04-22_16-51-19_hydra-sweep_1c4f61/analyze/weather_summary.csv",
+      "summary_json": "runs/2026-04-22_16-51-19_hydra-sweep_1c4f61/analyze/high_demand_summary.json",
+      "threshold": 563.0999999999985,
+      "rows_in": 17379
+    },
+    "report": {
+      "plots": {
+        "plot1": "runs/2026-04-22_16-51-19_hydra-sweep_1c4f61/report/hourly_demand_by_day_type.png",
+        "plot2": "runs/2026-04-22_16-51-19_hydra-sweep_1c4f61/report/high_demand_share_by_hour.png"
+      }
+    }
+  }
+}

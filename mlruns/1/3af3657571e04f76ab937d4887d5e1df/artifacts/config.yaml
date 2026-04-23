@@ -1,0 +1,18 @@
+run:
+  output_root: runs
+paths:
+  raw_dir: data/raw
+  intermediate_dir: data/intermediate
+  results_dir: results
+fetch:
+  source_url: https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip
+  archive_member: hour.csv
+prepare:
+  keep_holidays: true
+  write_prepared_csv: true
+analysis:
+  high_demand_quantile: 0.95
+report:
+  generate_plots: true
+profile:
+  name: base
