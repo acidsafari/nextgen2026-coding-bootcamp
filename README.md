@@ -1,5 +1,12 @@
 # NextGen Coding Bootcamp
 
+> [!CAUTION]
+> **DEPRECATION NOTICE**: This fork is no longer the primary development repository for this project. 
+> The work has been consolidated and archived into a new centralized portfolio:
+> **[CSIRO-nggp-coding-bootcamp](https://github.com/acidsafari/CSIRO-nggp-coding-bootcamp)**
+> 
+> Future updates, annotated notes, and agentic workflows will be maintained there.
+
 This four-session boot camp introduces the core workflow skills needed to run a computational research project from setup to reproducible handoff. We will learn how to structure a research repository, run analyses through scripts and configuration, capture logs and outputs, use coding tools such as Codex to accelerate development, and produce work that another researcher can rerun, review, and extend.
 
 ## Before Session 1
